@@ -2,18 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.u1a2;
+package com.mycompany.u2a2;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 /**
  *
  * @author 342441086
@@ -21,8 +12,8 @@ import java.util.Scanner;
 public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     MyTicTac gui;
     Thread playing;
-    ImageIcon a = new ImageIcon("x.jpg");
-    ImageIcon b = new ImageIcon("o.jpg");
+    ImageIcon a = new ImageIcon("x.png");
+    ImageIcon b = new ImageIcon("o.png");
     int clicks = 0;
     int win = 0;
     int[][] check = new int[5][5];
@@ -34,24 +25,6 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
                check[row][col]=0;
            }
        }
-    }
-    public void readFromFile() {
-        String data = "";
-        String[] scores = new String[3];
-        int winX = 0, winO = 0, tie = 0;
-        try {
-            File myFile = new File("accounts.txt");
-            Scanner fileInput = new Scanner(myFile);
-            data = fileInput.nextLine();
-            scores = data.split(",");
-            winX = Integer.parseInt(scores[0]);
-            winO = Integer.parseInt(scores[1]);
-            tie = Integer.parseInt(scores[2]);
-            fileInput.close();
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-        }
     }
     public void actionPerformed (ActionEvent event) {
        String command = event.getActionCommand();
