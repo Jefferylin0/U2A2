@@ -5,15 +5,6 @@
 package com.mycompany.u2a2;
 import java.awt.*;
 import javax.swing.*;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 /**
  *
  * @author 342441086
@@ -29,15 +20,16 @@ public class MyTicTac extends JFrame{
     JPanel row1 = new JPanel();
     JButton[][] boxes = new JButton[5][5];
     JButton play = new JButton("Play");
-    JTextField blank1 = new JTextField();
-    JTextField blank2 = new JTextField();
-    JTextField blank3 = new JTextField();
-    JTextField blank4 = new JTextField();
+    JButton reset = new JButton("Reset");
+    JLabel blank1 = new JLabel();
+    JLabel blank2 = new JLabel();
+    JLabel blank3 = new JLabel();
     JLabel box1 = new JLabel(game);
     JLabel box2 = new JLabel(game);
     JLabel titleBox = new JLabel(title);
     JLabel box3 = new JLabel(game);
     JLabel box4 = new JLabel(game);
+    Data data = new Data();
     
     public MyTicTac() {
         super("Tic Tac Toe");
@@ -68,11 +60,12 @@ public class MyTicTac extends JFrame{
         row1.add(blank1);
         row1.add(blank2);
         row1.add(play);
+        row1.add(reset);
         row1.add(blank3);
-        row1.add(blank4);
         add (row1);
 
         play.addActionListener(tictac);
+        reset.addActionListener(tictac);
         for (int x=0; x<=4; x++){
             for (int y=0; y<=4; y++){
                 boxes[x][y].addActionListener(tictac);

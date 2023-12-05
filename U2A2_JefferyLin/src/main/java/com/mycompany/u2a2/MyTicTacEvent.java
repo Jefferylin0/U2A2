@@ -14,8 +14,9 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     Thread playing;
     ImageIcon a = new ImageIcon("x.png");
     ImageIcon b = new ImageIcon("o.png");
+    Data data = new Data();
     int clicks = 0;
-    int win = 0;
+    int winx = 0, wino = 0, tie = 0;
     int[][] check = new int[5][5];
 
     public MyTicTacEvent (MyTicTac in){
@@ -231,47 +232,47 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     void winner() {
         /** Check rows for winner */
         
-        for (int x=0; x<=2; x++){
-            if ((check[x][0]==check[x][1])&&(check[x][0]==check[x][2])) {
+        for (int x=0; x<=4; x++){
+            if ((check[x][0]==check[x][1]) && (check[x][0]==check[x][2]) && (check[x][0]==check[x][3]) && (check[x][0]==check[x][4]) ) {
                 if (check[x][0]==1) {
                     JOptionPane.showMessageDialog(null, "X is the winner");
-                    win = 1;
+                    winx += 1;
                 } else if (check[x][0]==2){
-                    JOptionPane.showMessageDialog(null, "Y is the winner");
-                    win = 1;
+                    JOptionPane.showMessageDialog(null, "O is the winner");
+                    wino += 1;
                 }
             }
         }
 
         /** Check columns for winner */
-        for (int x=0; x<=2; x++){
-            if ((check[0][x]==check[1][x])&&(check[0][x]==check[2][x])) {
+        for (int x=0; x<=4; x++){
+            if ((check[0][x]==check[1][x]) && (check[0][x]==check[2][x]) && (check[0][x]==check[3][x]) && (check[0][x]==check[4][x]) ) {
                 if (check[0][x]==1) {
                     JOptionPane.showMessageDialog(null, "X is the winner");
-                    win = 1;
+                    winx += 1;
                 } else if (check[0][x]==2) {
-                    JOptionPane.showMessageDialog(null, "Y is the winner");
-                    win = 1;
+                    JOptionPane.showMessageDialog(null, "O is the winner");
+                    wino += 1;
                 }
             }
         }
 
         /** Check diagonals for winner */
-        if (((check[0][0]==check[1][1])&&(check[0][0]==check[2][2]))||
-                ((check[2][0]==check[1][1])&&(check[1][1]==check[0][2]))){
-            if (check[1][1]==1) {
+        if (((check[0][0]==check[1][1]) && (check[0][0]==check[2][2])) ||
+                ((check[2][0]==check[1][1]) && (check[1][1]==check[0][2]) )){
+            if (check[2][2]==1) {
                 JOptionPane.showMessageDialog(null, "X is the winner");
-                win = 1;
-            } else if (check[1][1]==2) {
+                winx += 1;
+            } else if (check[2][2]==2) {
                 JOptionPane.showMessageDialog(null, "Y is the winner");
-                win = 1;
+                wino += 1;
             }
-
         }
 
         /** Checks if the game is a tie */
-        if ((clicks==25) && (win==0)) {
+        if (clicks==25) {
             JOptionPane.showMessageDialog(null, "The game is a tie");
+            tie += 1;
         }
     }
 
