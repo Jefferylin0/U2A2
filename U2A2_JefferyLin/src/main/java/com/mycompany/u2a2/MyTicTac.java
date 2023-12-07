@@ -41,6 +41,9 @@ public class MyTicTac extends JFrame{
         setLayout(layout);
         int name = 0;
         String newname;
+        int[] scores = new int[3];
+        scores = data.read();
+
 
         GridLayout layout1 = new GridLayout(7, 5, 10, 10);
         row1.setLayout(layout1);
