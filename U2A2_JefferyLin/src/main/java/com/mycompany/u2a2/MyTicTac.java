@@ -15,21 +15,21 @@ public class MyTicTac extends JFrame{
     MyTicTacEvent tictac = new MyTicTacEvent(this);
     ImageIcon a = new ImageIcon("x.png");
     ImageIcon b = new ImageIcon("o.png");
-    ImageIcon back = new ImageIcon("cardback.jpg");
+    ImageIcon back = new ImageIcon("cardback.png");
     ImageIcon game = new ImageIcon("game.png");
     ImageIcon title = new ImageIcon("title.png");
     JPanel row1 = new JPanel();
     JButton[][] boxes = new JButton[5][5];
     JButton play = new JButton("Play");
+    JButton reset = new JButton("Reset");
     JTextField blank1 = new JTextField();
     JTextField blank2 = new JTextField();
     JTextField blank3 = new JTextField();
-    JTextField blank4 = new JTextField();
-    JLabel box1 = new JLabel(game);
+    JLabel box1 = new JLabel(a);
     JLabel box2 = new JLabel(game);
     JLabel titleBox = new JLabel(title);
     JLabel box3 = new JLabel(game);
-    JLabel box4 = new JLabel(game);
+    JLabel box4 = new JLabel(b);
     DataTool data = new DataTool();
     
     public MyTicTac() {
@@ -61,11 +61,12 @@ public class MyTicTac extends JFrame{
         row1.add(blank1);
         row1.add(blank2);
         row1.add(play);
+        row1.add(reset);
         row1.add(blank3);
-        row1.add(blank4);
         add (row1);
 
         play.addActionListener(tictac);
+        reset.addActionListener(tictac);
         for (int x=0; x<=4; x++){
             for (int y=0; y<=4; y++){
                 boxes[x][y].addActionListener(tictac);

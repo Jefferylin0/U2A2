@@ -43,7 +43,8 @@ public class DataTool {
     public void write(int winx, int wino, int tie) {
         String newLine = "";
         try {
-            FileWriter myWriter = new FileWriter("winsTracker", false);
+            FileWriter myWriter = new FileWriter("winsTracker.txt", false);
+            newLine = Integer.toString(winx) + "," + Integer.toString(wino) + "," + Integer.toString(tie);
             myWriter.write(newLine);
             myWriter.close();
         }

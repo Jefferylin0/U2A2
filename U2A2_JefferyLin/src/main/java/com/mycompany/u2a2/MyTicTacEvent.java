@@ -14,10 +14,13 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     Thread playing;
     ImageIcon a = new ImageIcon("x.png");
     ImageIcon b = new ImageIcon("o.png");
-    int clicks = 0;
-    int win = 0;
+    ImageIcon back = new ImageIcon("cardback.png");
+    int winx = 0, wino = 0, tie = 0, clicks = 0;
+    int[] scores = new int[3];
     int[][] check = new int[5][5];
-
+    DataTool data = new DataTool();
+    boolean game = true;
+    
     public MyTicTacEvent (MyTicTac in){
         gui = in;
         for (int row=0; row<=4; row++){
@@ -28,7 +31,9 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     }
     public void actionPerformed (ActionEvent event) {
        String command = event.getActionCommand();
-
+       if (command.equals("Reset")) {
+           reset();
+       }
        if (command.equals("Play")) {
            startPlaying();
        }
@@ -109,19 +114,22 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
        }
     }
     void buttonCalculations(int index) {
-        clicks += 1;
         int row = 0, col = 0;
         row = index / 5;
         col = (index - (row*5));
-        if ((clicks%2) == 1) {
-            gui.boxes[row][col].setIcon(a);
-            check[row][col] = 1;
+        if (check[row][col] == 0) {
+            clicks += 1;
+            if ((clicks%2) == 1) {
+                gui.boxes[row][col].setIcon(a);
+                check[row][col] = 1;
+            }
+            else {
+                gui.boxes[row][col].setIcon(b);
+                check[row][col] = 2;
+            }
+            System.out.println(row + ",   " + col + game);
+            winner();
         }
-        else {
-            gui.boxes[row][col].setIcon(b);
-            check[row][col] = 2;
-        }
-        winner();
     }
     void b1() {
         buttonCalculations(0);
@@ -230,52 +238,71 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     }
     void winner() {
         /** Check rows for winner */
-        
-        for (int x=0; x<=2; x++){
-            if ((check[x][0]==check[x][1])&&(check[x][0]==check[x][2])) {
-                if (check[x][0]==1) {
-                    JOptionPane.showMessageDialog(null, "X is the winner");
-                    win = 1;
-                } else if (check[x][0]==2){
-                    JOptionPane.showMessageDialog(null, "O is the winner");
-                    win = 1;
+        if (game == true) {
+            for (int x=0; x<=2; x++){
+                if ((check[x][0]==check[x][1]) && (check[x][0]==check[x][2]) && (check[x][0]==check[x][3]) && (check[x][0]==check[x][4]) ) {
+                    if (check[x][0]==1) {
+                        JOptionPane.showMessageDialog(null, "X is the winner");
+                        winx += 1;
+                        game = false;
+                    } else if (check[x][0]==2){
+                        JOptionPane.showMessageDialog(null, "O is the winner");
+                        wino += 1;
+                        game = false;
+                    }
                 }
             }
-        }
 
-        /** Check columns for winner */
-        for (int x=0; x<=2; x++){
-            if ((check[0][x]==check[1][x])&&(check[0][x]==check[2][x])) {
-                if (check[0][x]==1) {
-                    JOptionPane.showMessageDialog(null, "X is the winner");
-                    win = 1;
-                } else if (check[0][x]==2) {
-                    JOptionPane.showMessageDialog(null, "O is the winner");
-                    win = 1;
+            /** Check columns for winner */
+            for (int x=0; x<=2; x++){
+                if ((check[0][x]==check[1][x]) && (check[0][x]==check[2][x]) && (check[0][x]==check[3][x]) && (check[0][x]==check[4][x]) ) {
+                    if (check[0][x]==1) {
+                        JOptionPane.showMessageDialog(null, "X is the winner");
+                        winx += 1;
+                        game = false;
+                    } else if (check[0][x]==2) {
+                        JOptionPane.showMessageDialog(null, "O is the winner");
+                        wino += 1;
+                        game = false;
+                    }
                 }
             }
-        }
 
-        /** Check diagonals for winner */
-        if (((check[0][0]==check[1][1])&&(check[0][0]==check[2][2]))||
-                ((check[2][0]==check[1][1])&&(check[1][1]==check[0][2]))){
-            if (check[1][1]==1) {
-                JOptionPane.showMessageDialog(null, "X is the winner");
-                win = 1;
-            } else if (check[1][1]==2) {
-                JOptionPane.showMessageDialog(null, "Y is the winner");
-                win = 1;
+            /** Check diagonals for winner */
+            if (((check[0][4]==check[1][3]) && (check[0][4]==check[2][2]) && (check[0][4]==check[3][1]) && (check[0][4]==check[4][0]) )||
+                    ((check[0][0]==check[1][1]) && (check[1][1]==check[2][2]) && (check[2][2]==check[3][3]) && (check[3][3]==check[4][4]) )){
+                if (check[2][2]==1) {
+                    JOptionPane.showMessageDialog(null, "X is the winner");
+                    winx += 1;
+                    game = false;
+                } else if (check[2][2]==2) {
+                    JOptionPane.showMessageDialog(null, "O is the winner");
+                    wino += 1;
+                    game = false;
+                }
+
             }
 
-        }
-
-        /** Checks if the game is a tie */
-        if ((clicks==25) && (win==0)) {
-            JOptionPane.showMessageDialog(null, "The game is a tie");
+            /** Checks if the game is a tie */
+            if (clicks==25 && game == true) {
+                JOptionPane.showMessageDialog(null, "The game is a tie");
+                tie += 1;
+                game = false;
+            }
+            data.write(winx, wino, tie);
         }
     }
 
-     
+    void reset() {
+        for (int i = 0; i<5; i++) {
+            for (int j = 0; j<5; j++) {
+                check[i][j] = 0;
+                gui.boxes[i][j].setIcon(back);
+            }
+        }
+        clicks = 0;
+        game = true;
+    }
     void startPlaying() {
         playing = new Thread(this);
         playing.start();
