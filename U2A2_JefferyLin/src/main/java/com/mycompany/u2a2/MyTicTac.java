@@ -5,15 +5,7 @@
 package com.mycompany.u2a2;
 import java.awt.*;
 import javax.swing.*;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+
 /**
  *
  * @author 342441086
@@ -38,6 +30,7 @@ public class MyTicTac extends JFrame{
     JLabel titleBox = new JLabel(title);
     JLabel box3 = new JLabel(game);
     JLabel box4 = new JLabel(game);
+    DataTool data = new DataTool();
     
     public MyTicTac() {
         super("Tic Tac Toe");
