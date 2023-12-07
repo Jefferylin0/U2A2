@@ -237,7 +237,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
                     JOptionPane.showMessageDialog(null, "X is the winner");
                     win = 1;
                 } else if (check[x][0]==2){
-                    JOptionPane.showMessageDialog(null, "Y is the winner");
+                    JOptionPane.showMessageDialog(null, "O is the winner");
                     win = 1;
                 }
             }
@@ -250,7 +250,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
                     JOptionPane.showMessageDialog(null, "X is the winner");
                     win = 1;
                 } else if (check[0][x]==2) {
-                    JOptionPane.showMessageDialog(null, "Y is the winner");
+                    JOptionPane.showMessageDialog(null, "O is the winner");
                     win = 1;
                 }
             }
