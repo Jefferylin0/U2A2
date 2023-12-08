@@ -300,6 +300,13 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
                 gui.boxes[i][j].setIcon(back);
             }
         }
+        scores = data.read();
+        gui.blank1.setText("Win X:\n" + scores[0]);
+        gui.blank2.setText("Win O:\n" + scores[1]);
+        gui.blank3.setText("Tie:\n" + scores[2]);
+        winx = scores[0];
+        wino = scores[1];
+        tie = scores[2];
         clicks = 0;
         game = true;
     }
@@ -307,7 +314,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
         playing = new Thread(this);
         playing.start();
         gui.play.setEnabled(false);
-        game = true;
+        reset();
     }
 
     public void itemStateChanged(ItemEvent e) {
