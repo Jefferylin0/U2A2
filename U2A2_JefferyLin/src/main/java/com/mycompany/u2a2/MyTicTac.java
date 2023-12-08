@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.u2a2;
+
+// Importing the Java Swing things
 import java.awt.*;
 import javax.swing.*;
 
@@ -12,6 +14,7 @@ import javax.swing.*;
  */
 
 public class MyTicTac extends JFrame{
+    // Creating all the variables for the GUI
     MyTicTacEvent tictac = new MyTicTacEvent(this);
     ImageIcon a = new ImageIcon("x.png");
     ImageIcon b = new ImageIcon("o.png");
@@ -30,8 +33,10 @@ public class MyTicTac extends JFrame{
     JLabel titleBox = new JLabel(title);
     JLabel box3 = new JLabel(game);
     JLabel box4 = new JLabel(b);
+    // Creating the object for reading and writing the data
     DataTool data = new DataTool();
 
+    // Method that makes the TicTacToe GUI
     public MyTicTac() {
         super("Tic Tac Toe");
         setSize(900,900);
@@ -53,7 +58,6 @@ public class MyTicTac extends JFrame{
         blank3.setFont(new Font("Serif",Font.PLAIN,20));
         blank3.setEditable(false);
 
-        
         GridLayout layout1 = new GridLayout(7, 5, 10, 10);
         row1.setLayout(layout1);
         row1.add(box1);
@@ -76,7 +80,8 @@ public class MyTicTac extends JFrame{
         row1.add(reset);
         row1.add(blank3);
         add (row1);
-
+        
+        // Adding Action Listeners to the buttons
         play.addActionListener(tictac);
         reset.addActionListener(tictac);
         for (int x=0; x<=4; x++){
@@ -88,7 +93,7 @@ public class MyTicTac extends JFrame{
 
         setVisible(true);
     }
-    
+    // Creating the actual game GUI
     public static void main(String[] arguments){
         MyTicTac frame = new MyTicTac();
     }

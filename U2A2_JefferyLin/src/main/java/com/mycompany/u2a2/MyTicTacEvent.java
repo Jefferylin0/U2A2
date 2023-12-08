@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.u2a2;
+
+// Importing the Java Swing things
 import javax.swing.*;
 import java.awt.event.*;
 /**
@@ -10,6 +12,7 @@ import java.awt.event.*;
  * @author 342441086
  */
 public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
+    // Creating variables for the game
     MyTicTac gui;
     Thread playing;
     ImageIcon a = new ImageIcon("x.png");
@@ -18,7 +21,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     int winx = 0, wino = 0, tie = 0, clicks = 0;
     int[] scores = new int[3];
     int[][] check = new int[5][5];
-    DataTool data = new DataTool();
+    DataTool data = new DataTool(); // Data object to read and write from the file
     boolean game = false;
     
     public MyTicTacEvent (MyTicTac in){
@@ -29,6 +32,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
            }
        }
     }
+    // Checking which button is clicked
     public void actionPerformed (ActionEvent event) {
        String command = event.getActionCommand();
        if (command.equals("Reset")) {
@@ -113,6 +117,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
            b25();
        }
     }
+    // Method that takes in which button is clicked and runs the calculations to change its icon
     void buttonCalculations(int index) {
         int row = 0, col = 0;
         row = index / 5;
@@ -131,111 +136,83 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
             winner();
         }
     }
+    // Creating all the button methods and calling the calculation button in each one
     void b1() {
         buttonCalculations(0);
-        winner();
     }
     void b2() {
         buttonCalculations(1);
-        winner();
     }
     void b3() {
         buttonCalculations(2);
-        winner();
     }
     void b4() {
         buttonCalculations(3);
-        winner();
     }
     void b5() {
         buttonCalculations(4);
-        winner();
     }
     void b6() {
         buttonCalculations(5);
-        winner();
     }
     void b7() {
         buttonCalculations(6);
-        winner();
     }
     void b8() {
         buttonCalculations(7);
-        winner();
     }
     void b9() {
         buttonCalculations(8);
-        winner();
-    }
-    
+    }    
     void b10() {
         buttonCalculations(9);
-        winner();
-    }
-    
+    }    
     void b11() {
         buttonCalculations(10);
-        winner();
-    }
-    
+    }   
     void b12() {
         buttonCalculations(11);
-        winner();
     }
-    
     void b13() {
         buttonCalculations(12);
-        winner();
     }
-
     void b14() {
         buttonCalculations(13);
-        winner();
     }
     void b15() {
         buttonCalculations(14);
-        winner();
     }
     void b16() {
         buttonCalculations(15);
-        winner();
     }
     void b17() {
         buttonCalculations(16);
-        winner();
     }
     void b18() {
         buttonCalculations(17);
-        winner();
     }
     void b19() {
         buttonCalculations(18);
-        winner();
     }
     void b20() {
         buttonCalculations(19);
-        winner();
     }
     void b21() {
         buttonCalculations(20);
-        winner();
     }
     void b22() {
         buttonCalculations(21);
-        winner();
     }
     void b23() {
         buttonCalculations(22);
-        winner();
     }
     void b24() {
         buttonCalculations(23);
-        winner();
     }
     void b25() {
         buttonCalculations(24);
-        winner();
     }
+    // Method that checks for winner or tie
     void winner() {
         /** Check rows for winner */
         if (game == true) {
@@ -289,10 +266,11 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
                 tie += 1;
                 game = false;
             }
+            // Using data object to write data to file
             data.write(winx, wino, tie);
         }
     }
-
+    // Method to reset the game
     void reset() {
         for (int i = 0; i<5; i++) {
             for (int j = 0; j<5; j++) {
@@ -300,6 +278,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
                 gui.boxes[i][j].setIcon(back);
             }
         }
+        // Reading the data and changing the shown stats and updating the stats variables
         scores = data.read();
         gui.blank1.setText("Win X:\n" + scores[0]);
         gui.blank2.setText("Win O:\n" + scores[1]);
@@ -310,6 +289,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
         clicks = 0;
         game = true;
     }
+    // Variable that starts the game 
     void startPlaying() {
         playing = new Thread(this);
         playing.start();
