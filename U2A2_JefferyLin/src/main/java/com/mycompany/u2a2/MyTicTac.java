@@ -22,9 +22,9 @@ public class MyTicTac extends JFrame{
     JButton[][] boxes = new JButton[5][5];
     JButton play = new JButton("Play");
     JButton reset = new JButton("Reset");
-    JTextField blank1 = new JTextField();
-    JTextField blank2 = new JTextField();
-    JTextField blank3 = new JTextField();
+    JTextArea blank1 = new JTextArea();
+    JTextArea blank2 = new JTextArea();
+    JTextArea blank3 = new JTextArea();
     JLabel box1 = new JLabel(a);
     JLabel box2 = new JLabel(game);
     JLabel titleBox = new JLabel(title);
@@ -43,7 +43,9 @@ public class MyTicTac extends JFrame{
         String newname;
         int[] scores = new int[3];
         scores = data.read();
-
+        blank1.setText("Win X:\n" + scores[0]);
+        blank2.setText("Win O:\n" + scores[1]);
+        blank3.setText("Tie:\n" + scores[2]);
 
         GridLayout layout1 = new GridLayout(7, 5, 10, 10);
         row1.setLayout(layout1);

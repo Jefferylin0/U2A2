@@ -19,7 +19,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     int[] scores = new int[3];
     int[][] check = new int[5][5];
     DataTool data = new DataTool();
-    boolean game = true;
+    boolean game = false;
     
     public MyTicTacEvent (MyTicTac in){
         gui = in;
@@ -117,7 +117,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
         int row = 0, col = 0;
         row = index / 5;
         col = (index - (row*5));
-        if (check[row][col] == 0) {
+        if (check[row][col] == 0 && game == true) {
             clicks += 1;
             if ((clicks%2) == 1) {
                 gui.boxes[row][col].setIcon(a);
@@ -307,6 +307,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
         playing = new Thread(this);
         playing.start();
         gui.play.setEnabled(false);
+        game = true;
     }
 
     public void itemStateChanged(ItemEvent e) {
