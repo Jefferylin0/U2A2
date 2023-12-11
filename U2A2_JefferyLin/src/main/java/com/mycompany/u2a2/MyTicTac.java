@@ -49,13 +49,13 @@ public class MyTicTac extends JFrame{
         int[] scores = new int[3];
         scores = data.read();
         blank1.setText("Win X:\n" + scores[0]);
-        blank1.setFont(new Font("Serif",Font.PLAIN,20));
+        blank1.setFont(new Font("Serif",Font.PLAIN,25));
         blank1.setEditable(false);
         blank2.setText("Win O:\n" + scores[1]);
-        blank2.setFont(new Font("Serif",Font.PLAIN,20));
+        blank2.setFont(new Font("Serif",Font.PLAIN,25));
         blank2.setEditable(false);
         blank3.setText("Tie:\n" + scores[2]);
-        blank3.setFont(new Font("Serif",Font.PLAIN,20));
+        blank3.setFont(new Font("Serif",Font.PLAIN,25));
         blank3.setEditable(false);
 
         GridLayout layout1 = new GridLayout(7, 5, 10, 10);
