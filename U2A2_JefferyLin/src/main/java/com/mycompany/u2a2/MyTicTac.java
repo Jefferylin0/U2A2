@@ -16,18 +16,23 @@ import javax.swing.*;
 public class MyTicTac extends JFrame{
     // Creating all the variables for the GUI
     MyTicTacEvent tictac = new MyTicTacEvent(this);
+    // The image icons for the buttons and heading
     ImageIcon a = new ImageIcon("x.png");
     ImageIcon b = new ImageIcon("o.png");
     ImageIcon back = new ImageIcon("cardback.png");
     ImageIcon game = new ImageIcon("game.png");
     ImageIcon title = new ImageIcon("title.png");
+    // The panel that holds all the objects
     JPanel row1 = new JPanel();
+    // The buttons that are used for the game
     JButton[][] boxes = new JButton[5][5];
     JButton play = new JButton("Play");
     JButton reset = new JButton("Reset");
+    // The text areas that display the stats
     JTextArea blank1 = new JTextArea();
     JTextArea blank2 = new JTextArea();
     JTextArea blank3 = new JTextArea();
+    // The labels for the heading of the game
     JLabel box1 = new JLabel(a);
     JLabel box2 = new JLabel(game);
     JLabel titleBox = new JLabel(title);
