@@ -2,14 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+// Importing all the tools to read and write to the file
 package com.mycompany.u2a2;
-import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 /**
@@ -18,10 +15,11 @@ import java.util.Scanner;
  */
 public class DataTool {
     int winx = 0, wino = 0, tie = 0;
+    // Method that reads the file and returns an array
     public int[] read() {
-        String data = "";
+        String data = ""; 
         String[] scores = new String[3];
-        int[] scores2 = new int[3];
+        int[] scores2 = new int[3]; 
         try {
             File myFile = new File("winsTracker.txt");
             Scanner fileInput = new Scanner(myFile);
@@ -40,6 +38,7 @@ public class DataTool {
         }
         return scores2;
     }
+    // Method that takes the 3 stats and writes it to the file
     public void write(int winx, int wino, int tie) {
         String newLine = "";
         try {

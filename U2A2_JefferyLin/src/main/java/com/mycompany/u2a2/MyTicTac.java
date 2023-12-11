@@ -4,7 +4,7 @@
  */
 package com.mycompany.u2a2;
 
-// Importing the Java Swing things
+// Importing the Java Swing things for the GUI
 import java.awt.*;
 import javax.swing.*;
 

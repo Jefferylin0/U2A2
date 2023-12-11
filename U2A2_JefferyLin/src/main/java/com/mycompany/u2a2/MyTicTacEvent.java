@@ -4,7 +4,7 @@
  */
 package com.mycompany.u2a2;
 
-// Importing the Java Swing things
+// Importing the Java Swing things for the GUI
 import javax.swing.*;
 import java.awt.event.*;
 /**
@@ -22,7 +22,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     int[] scores = new int[3];
     int[][] check = new int[5][5];
     DataTool data = new DataTool(); // Data object to read and write from the file
-    boolean game = false;
+    boolean game = false; 
     
     public MyTicTacEvent (MyTicTac in){
         gui = in;
@@ -32,7 +32,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
            }
        }
     }
-    // Checking which button is clicked
+    // Checking which button is clicked and running its method
     public void actionPerformed (ActionEvent event) {
        String command = event.getActionCommand();
        if (command.equals("Reset")) {
@@ -119,11 +119,14 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     }
     // Method that takes in which button is clicked and runs the calculations to change its icon
     void buttonCalculations(int index) {
+        // Takes the index and finds the row and column of that index
         int row = 0, col = 0;
         row = index / 5;
         col = (index - (row*5));
+        // Only allow boxes to be clicked if it hasn't been clicked yet and game has started
         if (check[row][col] == 0 && game == true) {
             clicks += 1;
+            // Checks if a even or odd number of clicks have been done to decide between X and O
             if ((clicks%2) == 1) {
                 gui.boxes[row][col].setIcon(a);
                 check[row][col] = 1;
@@ -136,7 +139,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
             winner();
         }
     }
-    // Creating all the button methods and calling the calculation button in each one
+    // Creating all the button methods and calling its calculation button in each one
     void b1() {
         buttonCalculations(0);
     }
@@ -266,12 +269,13 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
                 tie += 1;
                 game = false;
             }
-            // Using data object to write data to file
+            // Using data object to write each stat to file
             data.write(winx, wino, tie);
         }
     }
     // Method to reset the game
     void reset() {
+        // Looping through all the boxes to set their icon to cardback
         for (int i = 0; i<5; i++) {
             for (int j = 0; j<5; j++) {
                 check[i][j] = 0;
@@ -286,10 +290,11 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
         winx = scores[0];
         wino = scores[1];
         tie = scores[2];
+        // Resetting clicks and allowing game to start again
         clicks = 0;
         game = true;
     }
-    // Variable that starts the game 
+    // Method that starts the game 
     void startPlaying() {
         playing = new Thread(this);
         playing.start();
