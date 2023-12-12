@@ -23,7 +23,7 @@ public class MyTicTacEvent implements ItemListener, ActionListener, Runnable{
     int[][] check = new int[5][5];
     DataTool data = new DataTool(); // Data object to read and write from the file
     boolean game = false; 
-    
+    // Connecting the event to the GUI
     public MyTicTacEvent (MyTicTac in){
         gui = in;
         for (int row=0; row<=4; row++){

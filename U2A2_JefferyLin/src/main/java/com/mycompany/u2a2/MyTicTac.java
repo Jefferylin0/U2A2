@@ -43,14 +43,17 @@ public class MyTicTac extends JFrame{
 
     // Method that makes the TicTacToe GUI
     public MyTicTac() {
+        // Setting the properties of the GUI
         super("Tic Tac Toe");
         setSize(900,900);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         FlowLayout layout = new FlowLayout();
         setLayout(layout);
+        // Creating the label for each box
         int name = 0;
         String newname;
+        // Reading the data from the file and setting the textareas to each stat
         int[] scores = new int[3];
         scores = data.read();
         blank1.setText("Win X:\n" + scores[0]);
@@ -62,7 +65,8 @@ public class MyTicTac extends JFrame{
         blank3.setText("Tie:\n" + scores[2]);
         blank3.setFont(new Font("Serif",Font.PLAIN,25));
         blank3.setEditable(false);
-
+        
+        // Creating a grid layout for all the parts and putting them on the layout
         GridLayout layout1 = new GridLayout(7, 5, 10, 10);
         row1.setLayout(layout1);
         row1.add(box1);
